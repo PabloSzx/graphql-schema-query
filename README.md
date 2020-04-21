@@ -80,7 +80,7 @@ const HelloWorldQuery: DocumentNode<
     helloWorld: string;
   },
   {
-    anyVariable: number;
+    anyVariable: string;
   }
 > = gql`
   query($anyVariable: String!) {
@@ -89,7 +89,11 @@ const HelloWorldQuery: DocumentNode<
 `;
 
 const helloWorld = async () => {
-  const data = await executeFromSchema(HelloWorldQuery);
+  const data = await executeFromSchema(HelloWorldQuery, {
+    variables: {
+      anyVariable: 123,
+    },
+  });
 
   // data === { helloWorld: string } | undefined | null
 };
