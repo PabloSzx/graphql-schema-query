@@ -91,7 +91,7 @@ const HelloWorldQuery: DocumentNode<
 const helloWorld = async () => {
   const data = await executeFromSchema(HelloWorldQuery, {
     variables: {
-      anyVariable: 123,
+      anyVariable: 'asd',
     },
   });
 
