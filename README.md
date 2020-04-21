@@ -1,5 +1,9 @@
 # graphql-schema-query
 
+[![npm version](https://badge.fury.io/js/graphql-schema-query.svg)](https://badge.fury.io/js/graphql-schema-query)
+[![bundlephobia](https://badgen.net/bundlephobia/minzip/graphql-schema-query)](https://bundlephobia.com/result?p=graphql-schema-query)
+[![license](https://badgen.net/github/license/pabloszx/graphql-schema-query)](https://github.com/pabloszx/graphql-schema-query)
+
 ```sh
 yarn add graphql-schema-query
 # or
