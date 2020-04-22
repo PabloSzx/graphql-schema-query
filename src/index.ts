@@ -1,10 +1,10 @@
-import graphql from 'graphql';
+import { execute, GraphQLSchema, validateSchema } from 'graphql';
 import gql, { DocumentNode } from 'graphql-tag-ts';
 
 export { default as gql, DocumentNode } from 'graphql-tag-ts';
 
-export default (schema: graphql.GraphQLSchema) => {
-  const schemaValidationErrors = graphql.validateSchema(schema);
+export default (schema: GraphQLSchema) => {
+  const schemaValidationErrors = validateSchema(schema);
   if (schemaValidationErrors.length > 0) {
     throw schemaValidationErrors;
   }
@@ -25,7 +25,7 @@ export default (schema: graphql.GraphQLSchema) => {
     if (typeof document === 'string') {
       document = gql(document);
     }
-    const { data, errors } = await graphql.execute<Data>({
+    const { data, errors } = await execute<Data>({
       schema,
       document,
       variableValues: variables,

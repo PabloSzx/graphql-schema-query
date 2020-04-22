@@ -19,7 +19,7 @@
     "lint": "tsdx lint -- fix",
     "prepublishOnly": "tsdx build",
     "start": "tsdx watch",
-    "test": "tsdx test"
+    "test": "tsdx test --passWithNoTests"
   },
   "husky": {
     "hooks": {
