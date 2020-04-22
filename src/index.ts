@@ -1,11 +1,11 @@
-import { execute, GraphQLSchema, validateSchema } from 'graphql';
+import { execute, GraphQLSchema, validateSchema, validate } from 'graphql';
 import gql, { DocumentNode } from 'graphql-tag-ts';
 
 export { default as gql, DocumentNode } from 'graphql-tag-ts';
 
 export default (schema: GraphQLSchema) => {
   const schemaValidationErrors = validateSchema(schema);
-  if (schemaValidationErrors.length > 0) {
+  if (schemaValidationErrors.length) {
     throw schemaValidationErrors;
   }
 
@@ -25,6 +25,13 @@ export default (schema: GraphQLSchema) => {
     if (typeof document === 'string') {
       document = gql(document);
     }
+
+    const documentValidationErrors = validate(schema, document);
+
+    if (documentValidationErrors.length) {
+      throw documentValidationErrors;
+    }
+
     const { data, errors } = await execute<Data>({
       schema,
       document,
@@ -35,6 +42,11 @@ export default (schema: GraphQLSchema) => {
     if (errors?.length) {
       throw errors;
     }
-    return data;
+    return (
+      data ??
+      (() => {
+        throw Error('Data could not be found');
+      })()
+    );
   };
 };
